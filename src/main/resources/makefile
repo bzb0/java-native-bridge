@@ -21,3 +21,19 @@ HelloWorldJNI.h : HelloWorldJNI.class
 
 clean_HelloWorldJNI :
 	del /f HelloWorldJNI.h HelloWorldJNI.o HelloWorldJNI.dll
+
+####################################################################################
+
+all_StringTest : StringTest.dll
+
+StringTest.dll : StringTest.o
+	gcc -Wl,--add-stdcall-alias -shared -o $@ $<
+
+StringTest.o : StringTest.c StringTest.h
+	gcc -I"C:\Program Files (x86)\Java\jdk1.7.0_40\include" -I"C:\Program Files (x86)\Java\jdk1.7.0_40\include\win32" -c $< -o $@
+
+StringTest.h : StringTest.class
+	javah -classpath $(CLASS_PATH) $*
+
+clean_StringTest :
+	del /f StringTest.h StringTest.o StringTest.dll
