@@ -69,3 +69,35 @@ PrimitiveArrayTest.h : PrimitiveArrayTest.class
 
 clean_PrimitiveArrayTest :
 	del /f PrimitiveArrayTest.h PrimitiveArrayTest.o PrimitiveArrayTest.dll
+
+####################################################################################
+
+all_MemberFieldTest : MemberFieldTest.dll
+
+MemberFieldTest.dll : MemberFieldTest.o
+	gcc -Wl,--add-stdcall-alias -shared -o $@ $<
+
+MemberFieldTest.o : MemberFieldTest.c MemberFieldTest.h
+	gcc -I"C:\Program Files (x86)\Java\jdk1.7.0_40\include" -I"C:\Program Files (x86)\Java\jdk1.7.0_40\include\win32" -c $< -o $@
+
+MemberFieldTest.h : MemberFieldTest.class
+	javah -classpath $(CLASS_PATH) $*
+
+clean_MemberFieldTest :
+	del /f MemberFieldTest.h MemberFieldTest.o MemberFieldTest.dll
+	
+####################################################################################
+
+all_MethodCallTest : MethodCallTest.dll
+
+MethodCallTest.dll : MethodCallTest.o
+	gcc -Wl,--add-stdcall-alias -shared -o $@ $<
+
+MethodCallTest.o : MethodCallTest.c MethodCallTest.h
+	gcc -I"C:\Program Files (x86)\Java\jdk1.7.0_40\include" -I"C:\Program Files (x86)\Java\jdk1.7.0_40\include\win32" -c $< -o $@
+
+MethodCallTest.h : MethodCallTest.class
+	javah -classpath $(CLASS_PATH) $*
+
+clean_MethodCallTest :
+	del /f MethodCallTest.h MethodCallTest.o MethodCallTest.dll
